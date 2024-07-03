@@ -23,6 +23,7 @@ We have analyzed that the following 17 attributes are important for the price pr
 15. num_rear_cameras
 16. num_cores
 17. processor_brand_snapdragon
+![Important Attributes](graph.png)
 
 # Model Analysis
 
