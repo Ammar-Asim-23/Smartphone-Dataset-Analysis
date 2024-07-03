@@ -46,7 +46,7 @@ def predict_price():
     predicted_price = model.predict(scaled_features)[0]
 
     # Return the predicted price as JSON response
-    return jsonify({'predicted_price': predicted_price})
+    return jsonify({'predicted_price': round(predicted_price,-2)})
 
 if __name__ == '__main__':
     app.run(debug=True)
