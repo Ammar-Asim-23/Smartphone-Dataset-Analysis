@@ -1,10 +1,12 @@
 from flask import Flask, request, jsonify
+from flask_cors import CORS
 import numpy as np
 import joblib
 from sklearn.preprocessing import StandardScaler
 
 app = Flask(__name__)
-
+app.config['CORS_HEADERS'] = 'Content-Type'
+cors = CORS(app)
 # Load your pre-trained model
 model = joblib.load('best_rf_model.pb')
 
@@ -12,24 +14,25 @@ scaler = joblib.load('scaler.pb')
 
 @app.route('/predict_price', methods=['POST'])
 def predict_price():
+    data = request.json
     # Extract input features from the form data
-    resolution_height = float(request.form['resolution_height'])
-    processor_speed = float(request.form['processor_speed'])
-    screen_size = float(request.form['screen_size'])
-    internal_memory = float(request.form['internal_memory'])
-    resolution_width = float(request.form['resolution_width'])
-    primary_camera_front = float(request.form['primary_camera_front'])
-    rating = float(request.form['rating'])
-    ram_capacity = float(request.form['ram_capacity'])
-    has_nfc = int(request.form['has_nfc'])
-    extended_memory_available = int(request.form['extended_memory_available'])
-    primary_camera_rear = float(request.form['primary_camera_rear'])
-    os_ios = int(request.form['os_ios'])
-    refresh_rate = float(request.form['refresh_rate'])
-    has_5g = int(request.form['has_5g'])
-    num_rear_cameras = int(request.form['num_rear_cameras'])
-    num_cores = int(request.form['num_cores'])
-    processor_brand_snapdragon = int(request.form['processor_brand_snapdragon'])
+    resolution_height = float(data['resolution_height'])
+    processor_speed = float(data['processor_speed'])
+    screen_size = float(data['screen_size'])
+    internal_memory = float(data['internal_memory'])
+    resolution_width = float(data['resolution_width'])
+    primary_camera_front = float(data['primary_camera_front'])
+    rating = float(data['rating'])
+    ram_capacity = float(data['ram_capacity'])
+    has_nfc = int(data['has_nfc'])
+    extended_memory_available = int(data['extended_memory_available'])
+    primary_camera_rear = float(data['primary_camera_rear'])
+    os_ios = int(data['os_ios'])
+    refresh_rate = float(data['refresh_rate'])
+    has_5g = int(data['has_5g'])
+    num_rear_cameras = int(data['num_rear_cameras'])
+    num_cores = int(data['num_cores'])
+    processor_brand_snapdragon = int(data['processor_brand_snapdragon'])
 
     # Create input features array
     features = np.array([[
