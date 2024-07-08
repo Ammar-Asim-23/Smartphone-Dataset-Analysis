@@ -2,19 +2,32 @@ from flask import Flask, request, jsonify
 from flask_cors import CORS
 import numpy as np
 import joblib
-from sklearn.preprocessing import StandardScaler
 
 app = Flask(__name__)
 app.config['CORS_HEADERS'] = 'Content-Type'
 cors = CORS(app)
 # Load your pre-trained model
-model = joblib.load('best_rf_model.pb')
+models = {
+    'best_rf_model' : joblib.load('models/best_rf_model.pb'),
+    'custom_linear_regression' : joblib.load('models/custom_linear_regression.pb'),
+    'custom_random_forest' : joblib.load('models/custom_random_forest.pb'),
+    'random_forest' : joblib.load('models/random_forest.pb'),
+    'linear_regression' : joblib.load('models/linear_regression.pb')    
+    }
 
-scaler = joblib.load('scaler.pb')
+scaler = joblib.load('models/scaler.pb')
 
 @app.route('/predict_price', methods=['POST'])
 def predict_price():
     data = request.json
+
+    model_choice = data.get('model_choice', 'best_rf_model')  # default to best_rf_model if not specified
+    # Validate model choice
+    if model_choice not in models:
+        return jsonify({'error': 'Invalid model choice'}), 400
+    
+    model = models[model_choice]
+
     # Extract input features from the form data
     resolution_height = float(data['resolution_height'])
     processor_speed = float(data['processor_speed'])
