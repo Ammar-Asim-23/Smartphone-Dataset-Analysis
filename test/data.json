@@ -1,0 +1,21 @@
+{
+    "resolution_height": 3216,
+    "processor_speed": 3.2,
+    "screen_size": 6.7,
+    "internal_memory": 256.0,
+    "resolution_width": 1440,
+    "primary_camera_front": 16.0,
+    "rating": 89.0,
+    "ram_capacity": 12.0,
+    "has_nfc": 1,
+    "extended_memory_available": 0,
+    "primary_camera_rear": 50.0,
+    "os_ios": 0,
+    "refresh_rate": 120,
+    "has_5g": 1,
+    "num_rear_cameras": 3,
+    "num_cores": 8,
+    "processor_brand_snapdragon": 1,
+    "model_choice": "random_forest"
+  }
+  
